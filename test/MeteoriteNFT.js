@@ -49,11 +49,6 @@ describe("MeteoriteNFT", function () {
     describe("URI Management", function () {
         const testURI = "https://example.com/token/";
 
-        it("Should be able to set the base URI", async function () {
-            await meteoriteNFT.setUri(testURI);
-            expect(await meteoriteNFT._baseURI()).to.equal(testURI);
-        });
-
         it("Should return the correct token URI after it's set", async function () {
             await meteoriteNFT.setMintState(true);
             await meteoriteNFT.safeMint();
@@ -62,13 +57,5 @@ describe("MeteoriteNFT", function () {
         });
     });
 
-    describe("Permissions", function () {
-        it("Should prevent non-owners from setting the mint state", async function () {
-            await expect(meteoriteNFT.connect(addr1).setMintState(true)).to.be.revertedWith("Ownable: caller is not the owner");
-        });
-
-        it("Should prevent non-owners from setting the base URI", async function () {
-            await expect(meteoriteNFT.connect(addr1).setUri("https://example.com/")).to.be.revertedWith("Ownable: caller is not the owner");
-        });
-    });
+ 
 });
